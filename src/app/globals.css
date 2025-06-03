@@ -1,17 +1,20 @@
 @import "tailwindcss";
 
-/* Basis-Setup für bessere Lesbarkeit */
-html {
-  color-scheme: light;
+/* KOMPLETTE CSS-ÜBERSCHREIBUNG FÜR LESBARKEIT */
+
+/* Basis für alle Elemente */
+* {
+  color: #1e293b !important;
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: #f8fafc;
-  color: #1e293b;
+/* Body und Grundelemente */
+body, html {
+  background: #f8fafc !important;
+  color: #1e293b !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
 }
 
-/* INPUT-FELDER LESBAR MACHEN - HÖCHSTE PRIORITÄT */
+/* Alle Eingabefelder */
 input, textarea, select {
   background: #ffffff !important;
   color: #1e293b !important;
@@ -28,7 +31,7 @@ input:focus, textarea:focus, select:focus {
   outline: none !important;
 }
 
-/* LABELS LESBAR MACHEN */
+/* Alle Labels */
 label {
   color: #374151 !important;
   font-weight: 600 !important;
@@ -36,45 +39,131 @@ label {
   margin-bottom: 4px !important;
 }
 
-/* CARDS UND CONTAINER */
-.bg-white {
+/* Alle Container und Cards */
+div, section, article, main, header, nav, aside, footer {
+  background: inherit !important;
+  color: #1e293b !important;
+}
+
+.bg-white, [class*="bg-white"] {
   background: #ffffff !important;
   color: #1e293b !important;
 }
 
-/* TEXT-FARBEN KORRIGIEREN */
-.text-gray-900, .text-gray-800, .text-gray-700 {
+.bg-gray-50, [class*="bg-gray-50"] {
+  background: #f9fafb !important;
   color: #1e293b !important;
 }
 
-.text-gray-600, .text-gray-500 {
-  color: #4b5563 !important;
+.bg-gray-100, [class*="bg-gray-100"] {
+  background: #f3f4f6 !important;
+  color: #1e293b !important;
 }
 
-/* BUTTONS LESBAR MACHEN */
-.bg-blue-600 {
+/* Alle Texte */
+h1, h2, h3, h4, h5, h6 {
+  color: #1e293b !important;
+  font-weight: 600 !important;
+}
+
+p, span, div, a {
+  color: #1e293b !important;
+}
+
+/* Alle Buttons */
+button {
+  font-weight: 600 !important;
+  border-radius: 6px !important;
+  padding: 8px 16px !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+
+.bg-blue-600, [class*="bg-blue-600"] {
   background: #2563eb !important;
   color: #ffffff !important;
 }
 
-.bg-green-600 {
+.bg-green-600, [class*="bg-green-600"] {
   background: #16a34a !important;
   color: #ffffff !important;
 }
 
-.bg-red-600 {
+.bg-red-600, [class*="bg-red-600"] {
   background: #dc2626 !important;
   color: #ffffff !important;
 }
 
-.bg-yellow-500 {
+.bg-yellow-500, [class*="bg-yellow-500"] {
   background: #eab308 !important;
   color: #000000 !important;
 }
 
-.bg-orange-500 {
+.bg-orange-500, [class*="bg-orange-500"] {
   background: #f97316 !important;
   color: #ffffff !important;
+}
+
+/* Text-Farben überschreiben */
+.text-gray-900, .text-gray-800, .text-gray-700, .text-gray-600, .text-gray-500 {
+  color: #1e293b !important;
+}
+
+.text-white {
+  color: #ffffff !important;
+}
+
+/* Placeholder-Text */
+::placeholder {
+  color: #6b7280 !important;
+}
+
+/* Links */
+a {
+  color: #2563eb !important;
+  text-decoration: none !important;
+}
+
+a:hover {
+  color: #1d4ed8 !important;
+  text-decoration: underline !important;
+}
+
+/* Listen */
+ul, ol, li {
+  color: #1e293b !important;
+}
+
+/* Tabellen */
+table, th, td {
+  color: #1e293b !important;
+  background: #ffffff !important;
+  border-color: #d1d5db !important;
+}
+
+/* Icons - Lucide Icons haben manchmal eigene Farben */
+svg {
+  color: inherit !important;
+}
+
+/* Checkboxes */
+input[type="checkbox"] {
+  accent-color: #2563eb !important;
+}
+
+/* Error-Texte */
+.text-red-600, [class*="text-red"] {
+  color: #dc2626 !important;
+}
+
+/* Success-Texte */
+.text-green-600, [class*="text-green"] {
+  color: #16a34a !important;
+}
+
+/* Warning-Texte */
+.text-yellow-600, [class*="text-yellow"] {
+  color: #d97706 !important;
 }
 
 /* Priority Badges */
@@ -189,31 +278,6 @@ input[type="file"] {
 .form-group label {
   color: #374151 !important;
   font-weight: 600 !important;
-}
-
-/* Sicherstellen, dass Text immer lesbar ist */
-.text-white {
-  color: #ffffff !important;
-}
-
-.text-black {
-  color: #000000 !important;
-}
-
-.text-gray-900 {
-  color: #0f172a !important;
-}
-
-.text-gray-700 {
-  color: #334155 !important;
-}
-
-.text-gray-600 {
-  color: #475569 !important;
-}
-
-.text-gray-500 {
-  color: #64748b !important;
 }
 
 /* Card-Styling */
