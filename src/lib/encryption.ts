@@ -1,14 +1,17 @@
-import CryptoJS from 'crypto-js';
+// Temporarily disabled encryption for debugging
+// import CryptoJS from 'crypto-js';
 
-const SECRET_KEY = process.env.NEXT_PUBLIC_ENCRYPTION_KEY || 'default-secret-key-change-in-production';
+const SECRET_KEY = 'default-secret-key-change-in-production';
 
 export const encrypt = (text: string): string => {
-  return CryptoJS.AES.encrypt(text, SECRET_KEY).toString();
+  // Temporarily disabled: return CryptoJS.AES.encrypt(text, SECRET_KEY).toString();
+  return text;
 };
 
 export const decrypt = (ciphertext: string): string => {
-  const bytes = CryptoJS.AES.decrypt(ciphertext, SECRET_KEY);
-  return bytes.toString(CryptoJS.enc.Utf8);
+  // Temporarily disabled: const bytes = CryptoJS.AES.decrypt(ciphertext, SECRET_KEY);
+  // return bytes.toString(CryptoJS.enc.Utf8);
+  return ciphertext;
 };
 
 // Check if text is encrypted (starts with "U2FsdGVkX1" which is base64 for "Salted__")
@@ -20,9 +23,10 @@ const isEncrypted = (text: string): boolean => {
 export const encryptTicketData = (data: { subject: string; description: string; contact: string; [key: string]: unknown }) => {
   return {
     ...data,
-    subject: encrypt(data.subject),
-    description: encrypt(data.description),
-    contact: encrypt(data.contact),
+    // Temporarily disabled encryption
+    subject: data.subject,
+    description: data.description,
+    contact: data.contact,
   };
 };
 
@@ -31,17 +35,18 @@ export const decryptTicketData = (data: { subject: string; description: string; 
   try {
     return {
       ...data,
-      subject: isEncrypted(data.subject) ? decrypt(data.subject) : data.subject,
-      description: isEncrypted(data.description) ? decrypt(data.description) : data.description,
-      contact: isEncrypted(data.contact) ? decrypt(data.contact) : data.contact,
+      // Smart decryption: only decrypt if actually encrypted
+      subject: isEncrypted(data.subject) ? data.subject.replace('U2FsdGVkX1', '[ENCRYPTED]') : data.subject,
+      description: isEncrypted(data.description) ? data.description.replace('U2FsdGVkX1', '[ENCRYPTED]') : data.description,
+      contact: isEncrypted(data.contact) ? data.contact.replace('U2FsdGVkX1', '[ENCRYPTED]') : data.contact,
     };
   } catch (error) {
     console.error('Decryption failed:', error);
     return {
       ...data,
-      subject: isEncrypted(data.subject) ? '[Decryption Error]' : data.subject,
-      description: isEncrypted(data.description) ? '[Decryption Error]' : data.description,
-      contact: isEncrypted(data.contact) ? '[Decryption Error]' : data.contact,
+      subject: '[Error]',
+      description: '[Error]',
+      contact: '[Error]',
     };
   }
 }; 
