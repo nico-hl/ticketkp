@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { CreateTicketForm } from '@/components/CreateTicketForm';
 import { TicketList } from '@/components/TicketList';
 import { Plus, TicketIcon, TrendingUp, Users, AlertTriangle } from 'lucide-react';
-import { createTicket, getTickets, updateTicketStatus, deleteTicket, updatePWABadge } from '@/lib/api';
+import { createTicket, getTickets, updateTicketStatus, deleteTicket, updatePWABadge } from '@/lib/api-client';
 import type { Ticket, CreateTicketData, TicketStatus } from '@/types/ticket';
 
 export default function HomePage() {
