@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  ticketsystem:
+    build: .
+    container_name: ticketsystem
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_SUPABASE_URL=${SUPABASE_URL}
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
+      - NEXT_PUBLIC_ENCRYPTION_KEY=${ENCRYPTION_KEY}
+    volumes:
+      # Optional: Mount for persistent data if needed
+      - ./data:/app/data
+    networks:
+      - ticketsystem-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  ticketsystem-network:
+    driver: bridge
+
+# For development with local database (optional)
+# Uncomment if you want a local Supabase alternative
+# 
+# postgres:
+#   image: postgres:15-alpine
+#   container_name: ticketsystem-db
+#   restart: unless-stopped
+#   environment:
+#     POSTGRES_DB: ticketsystem
+#     POSTGRES_USER: postgres
+#     POSTGRES_PASSWORD: ${DB_PASSWORD:-your_secure_password}
+#   volumes:
+#     - postgres_data:/var/lib/postgresql/data
+#     - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+#   ports:
+#     - "5432:5432"
+#   networks:
+#     - ticketsystem-network
+
+# volumes:
+#   postgres_data: 

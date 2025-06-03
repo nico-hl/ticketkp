@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Ticketsystem</Name>
+  <Repository>ticketsystem:latest</Repository>
+  <Registry>local</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/your-username/ticketsystem</Support>
+  <Project>https://github.com/your-username/ticketsystem</Project>
+  <Overview>
+    Modernes, verschlüsseltes Ticketsystem als PWA mit iOS-Badge-Support.
+    
+    Features:
+    - 📱 PWA mit iOS-Badge-Support
+    - 🔒 End-to-End Verschlüsselung
+    - 📅 Apple-Style Datepicker
+    - 📎 Datei- & Bildupload
+    - 👥 Benutzer-Zuweisung
+    - ⚡ Prioritäts-System
+    - 🔄 Status-Management
+    - 📊 Dashboard mit Statistiken
+    
+    Benötigt Supabase als Backend oder kann mit lokaler PostgreSQL-Datenbank betrieben werden.
+  </Overview>
+  <Category>Productivity:</Category>
+  <WebUI>http://[IP]:[PORT:3000]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/your-username/ticketsystem/main/unraid-template.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/your-username/ticketsystem/main/public/icons/icon-192x192.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1234567890</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <Config Name="WebUI Port" Target="3000" Default="3000" Mode="tcp" Description="Port für die Web-Oberfläche" Type="Port" Display="always" Required="true" Mask="false">3000</Config>
+  <Config Name="Supabase URL" Target="NEXT_PUBLIC_SUPABASE_URL" Default="" Mode="" Description="Ihre Supabase Projekt-URL (z.B. https://xyz.supabase.co)" Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="Supabase Anon Key" Target="NEXT_PUBLIC_SUPABASE_ANON_KEY" Default="" Mode="" Description="Ihr Supabase Anonymous Key" Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="Encryption Key" Target="NEXT_PUBLIC_ENCRYPTION_KEY" Default="" Mode="" Description="32-Zeichen Verschlüsselungsschlüssel für sensible Daten" Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="App Data" Target="/app/data" Default="/mnt/user/appdata/ticketsystem" Mode="rw" Description="Pfad für App-Daten (optional)" Type="Path" Display="advanced" Required="false" Mask="false">/mnt/user/appdata/ticketsystem</Config>
+</Container> 
