@@ -34,8 +34,8 @@ Komplette Anleitung zur Installation des Ticketsystems auf Unraid oder anderen D
 
 ```bash
 cd /mnt/user/appdata/
-git clone https://github.com/your-username/ticketsystem.git
-cd ticketsystem
+git clone https://github.com/nico-hk/ticketkp.git
+cd ticketkp
 ```
 
 ### Schritt 2: Umgebungsvariablen konfigurieren
@@ -79,7 +79,7 @@ docker run -d \
   -e NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co \
   -e NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key \
   -e NEXT_PUBLIC_ENCRYPTION_KEY=your-32-char-key \
-  -v /mnt/user/appdata/ticketsystem/data:/app/data \
+  -v /mnt/user/appdata/ticketkp/data:/app/data \
   ticketsystem:latest
 ```
 
@@ -139,7 +139,7 @@ deploy:
 
 ### 1. Code aktualisieren
 ```bash
-cd /mnt/user/appdata/ticketsystem
+cd /mnt/user/appdata/ticketkp
 git pull origin main
 ```
 
@@ -233,7 +233,7 @@ postgres:
 docker exec postgres pg_dump -U postgres ticketsystem > backup.sql
 
 # Volume Backup
-tar -czf ticketsystem-backup.tar.gz /mnt/user/appdata/ticketsystem/
+tar -czf ticketsystem-backup.tar.gz /mnt/user/appdata/ticketkp/
 ```
 
 ## 📞 Support

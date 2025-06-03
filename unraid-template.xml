@@ -7,8 +7,8 @@
   <MyIP/>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
-  <Support>https://github.com/your-username/ticketsystem</Support>
-  <Project>https://github.com/your-username/ticketsystem</Project>
+  <Support>https://github.com/nico-hk/ticketkp</Support>
+  <Project>https://github.com/nico-hk/ticketkp</Project>
   <Overview>
     Modernes, verschlüsseltes Ticketsystem als PWA mit iOS-Badge-Support.
     
@@ -26,8 +26,8 @@
   </Overview>
   <Category>Productivity:</Category>
   <WebUI>http://[IP]:[PORT:3000]</WebUI>
-  <TemplateURL>https://raw.githubusercontent.com/your-username/ticketsystem/main/unraid-template.xml</TemplateURL>
-  <Icon>https://raw.githubusercontent.com/your-username/ticketsystem/main/public/icons/icon-192x192.png</Icon>
+  <TemplateURL>https://raw.githubusercontent.com/nico-hk/ticketkp/main/unraid-template.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/nico-hk/ticketkp/main/public/icons/icon-192x192.png</Icon>
   <ExtraParams/>
   <PostArgs/>
   <CPUset/>
@@ -39,5 +39,5 @@
   <Config Name="Supabase URL" Target="NEXT_PUBLIC_SUPABASE_URL" Default="" Mode="" Description="Ihre Supabase Projekt-URL (z.B. https://xyz.supabase.co)" Type="Variable" Display="always" Required="true" Mask="false"/>
   <Config Name="Supabase Anon Key" Target="NEXT_PUBLIC_SUPABASE_ANON_KEY" Default="" Mode="" Description="Ihr Supabase Anonymous Key" Type="Variable" Display="always" Required="true" Mask="true"/>
   <Config Name="Encryption Key" Target="NEXT_PUBLIC_ENCRYPTION_KEY" Default="" Mode="" Description="32-Zeichen Verschlüsselungsschlüssel für sensible Daten" Type="Variable" Display="always" Required="true" Mask="true"/>
-  <Config Name="App Data" Target="/app/data" Default="/mnt/user/appdata/ticketsystem" Mode="rw" Description="Pfad für App-Daten (optional)" Type="Path" Display="advanced" Required="false" Mask="false">/mnt/user/appdata/ticketsystem</Config>
+  <Config Name="App Data" Target="/app/data" Default="/mnt/user/appdata/ticketkp" Mode="rw" Description="Pfad für App-Daten (optional)" Type="Path" Display="advanced" Required="false" Mask="false">/mnt/user/appdata/ticketkp</Config>
 </Container> 

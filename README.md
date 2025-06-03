@@ -37,8 +37,8 @@ Ein elegantes, verschlüsseltes Ticketsystem als Progressive Web App (PWA) für 
 1. **Repository in Unraid klonen:**
    ```bash
    cd /mnt/user/appdata/
-   git clone https://github.com/your-username/ticketsystem.git
-   cd ticketsystem
+   git clone https://github.com/nico-hk/ticketkp.git
+   cd ticketkp
    ```
 
 2. **Umgebungsvariablen einrichten:**
@@ -72,8 +72,8 @@ Ein elegantes, verschlüsseltes Ticketsystem als Progressive Web App (PWA) für 
 
 1. **Repository klonen**
    ```bash
-   git clone <repository-url>
-   cd ticketsystem
+   git clone https://github.com/nico-hk/ticketkp.git
+   cd ticketkp
    ```
 
 2. **Dependencies installieren**
@@ -184,7 +184,7 @@ Ein elegantes, verschlüsseltes Ticketsystem als Progressive Web App (PWA) für 
 
 ### Unraid (empfohlen)
 ```bash
-# In /mnt/user/appdata/ticketsystem/
+# In /mnt/user/appdata/ticketkp/
 docker-compose up -d
 ```
 
@@ -204,7 +204,7 @@ npm start
 
 ### Docker auf Unraid
 ```bash
-cd /mnt/user/appdata/ticketsystem
+cd /mnt/user/appdata/ticketkp
 git pull origin main
 docker-compose build --no-cache
 docker-compose up -d
