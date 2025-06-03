@@ -1,17 +1,194 @@
 @import "tailwindcss";
 
-/* Basis-Styling für bessere Lesbarkeit */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* Basis-Setup für bessere Lesbarkeit */
+html {
+  color-scheme: light;
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background-color: #f8fafc;
+  background: #f8fafc;
   color: #1e293b;
-  line-height: 1.6;
+}
+
+/* INPUT-FELDER LESBAR MACHEN - HÖCHSTE PRIORITÄT */
+input, textarea, select {
+  background: #ffffff !important;
+  color: #1e293b !important;
+  border: 2px solid #d1d5db !important;
+  padding: 8px 12px !important;
+  border-radius: 6px !important;
+  font-size: 16px !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #2563eb !important;
+  background: #ffffff !important;
+  color: #1e293b !important;
+  outline: none !important;
+}
+
+/* LABELS LESBAR MACHEN */
+label {
+  color: #374151 !important;
+  font-weight: 600 !important;
+  display: block !important;
+  margin-bottom: 4px !important;
+}
+
+/* CARDS UND CONTAINER */
+.bg-white {
+  background: #ffffff !important;
+  color: #1e293b !important;
+}
+
+/* TEXT-FARBEN KORRIGIEREN */
+.text-gray-900, .text-gray-800, .text-gray-700 {
+  color: #1e293b !important;
+}
+
+.text-gray-600, .text-gray-500 {
+  color: #4b5563 !important;
+}
+
+/* BUTTONS LESBAR MACHEN */
+.bg-blue-600 {
+  background: #2563eb !important;
+  color: #ffffff !important;
+}
+
+.bg-green-600 {
+  background: #16a34a !important;
+  color: #ffffff !important;
+}
+
+.bg-red-600 {
+  background: #dc2626 !important;
+  color: #ffffff !important;
+}
+
+.bg-yellow-500 {
+  background: #eab308 !important;
+  color: #000000 !important;
+}
+
+.bg-orange-500 {
+  background: #f97316 !important;
+  color: #ffffff !important;
+}
+
+/* Priority Badges */
+.priority-low {
+  background: #16a34a;
+  color: #ffffff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.priority-normal {
+  background: #eab308;
+  color: #000000;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.priority-high {
+  background: #dc2626;
+  color: #ffffff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Status Badges */
+.status-open {
+  background: #2563eb;
+  color: #ffffff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-in-progress {
+  background: #f97316;
+  color: #ffffff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-completed {
+  background: #16a34a;
+  color: #ffffff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Ticket Cards */
+.ticket-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.ticket-card h3 {
+  color: #1e293b;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.ticket-card p {
+  color: #4b5563;
+  margin-bottom: 0.75rem;
+}
+
+/* Navigation und Header */
+header {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  color: #1e293b;
+}
+
+/* Checkbox Styling */
+input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  accent-color: #2563eb;
+}
+
+/* File Upload */
+input[type="file"] {
+  padding: 0.5rem;
+  border: 2px dashed #d1d5db;
+  background: #f9fafb;
+  color: #374151;
+}
+
+/* Spezifische Überschreibungen für problematische Bereiche */
+.form-group input,
+.form-group textarea,
+.form-group select {
+  background-color: #ffffff !important;
+  color: #1e293b !important;
+  border-color: #d1d5db !important;
+}
+
+.form-group label {
+  color: #374151 !important;
+  font-weight: 600 !important;
 }
 
 /* Sicherstellen, dass Text immer lesbar ist */
@@ -40,11 +217,6 @@ body {
 }
 
 /* Card-Styling */
-.bg-white {
-  background-color: #ffffff !important;
-  color: #1e293b !important;
-}
-
 .bg-gray-50 {
   background-color: #f8fafc !important;
   color: #1e293b !important;
@@ -56,23 +228,8 @@ body {
 }
 
 /* Button-Styling */
-.bg-blue-600 {
-  background-color: #2563eb !important;
-  color: #ffffff !important;
-}
-
 .bg-blue-700 {
   background-color: #1d4ed8 !important;
-  color: #ffffff !important;
-}
-
-.bg-green-600 {
-  background-color: #16a34a !important;
-  color: #ffffff !important;
-}
-
-.bg-red-600 {
-  background-color: #dc2626 !important;
   color: #ffffff !important;
 }
 
