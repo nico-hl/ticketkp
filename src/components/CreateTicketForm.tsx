@@ -23,6 +23,37 @@ interface CreateTicketFormProps {
   isLoading?: boolean;
 }
 
+// Inline styles für bessere Lesbarkeit
+const inputStyle = {
+  backgroundColor: '#ffffff',
+  color: '#1e293b',
+  border: '2px solid #d1d5db',
+  padding: '12px',
+  borderRadius: '12px',
+  fontSize: '16px',
+  width: '100%',
+};
+
+const labelStyle = {
+  color: '#374151',
+  fontWeight: '600',
+  fontSize: '14px',
+  marginBottom: '8px',
+  display: 'block',
+};
+
+const textareaStyle = {
+  backgroundColor: '#ffffff',
+  color: '#1e293b',
+  border: '2px solid #d1d5db',
+  padding: '12px',
+  borderRadius: '12px',
+  fontSize: '16px',
+  width: '100%',
+  minHeight: '120px',
+  resize: 'vertical',
+};
+
 export function CreateTicketForm({ onSubmit, isLoading = false }: CreateTicketFormProps) {
   const [date, setDate] = useState(new Date());
   const [files, setFiles] = useState<File[]>([]);
@@ -75,64 +106,63 @@ export function CreateTicketForm({ onSubmit, isLoading = false }: CreateTicketFo
   ];
 
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-8">
+    <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-8" style={{ backgroundColor: '#ffffff', color: '#1e293b' }}>
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-gray-900">Neues Ticket erstellen</h2>
-        <p className="text-gray-600 mt-2">Alle Felder ausfüllen und Ticket absenden</p>
+        <h2 className="text-2xl font-bold" style={{ color: '#1e293b' }}>Neues Ticket erstellen</h2>
+        <p className="mt-2" style={{ color: '#4b5563' }}>Alle Felder ausfüllen und Ticket absenden</p>
       </div>
 
       <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
         {/* Betreff */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label style={labelStyle}>
             Betreff
           </label>
           <input
             {...register('subject')}
             type="text"
-            className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            style={inputStyle}
             placeholder="Kurze Beschreibung des Problems..."
           />
           {errors.subject && (
-            <p className="mt-1 text-sm text-red-600">{errors.subject.message}</p>
+            <p className="mt-1 text-sm" style={{ color: '#dc2626' }}>{errors.subject.message}</p>
           )}
         </div>
 
         {/* Beschreibung */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label style={labelStyle}>
             Um was geht es?
           </label>
           <textarea
             {...register('description')}
-            rows={4}
-            className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+            style={textareaStyle}
             placeholder="Detaillierte Beschreibung des Problems oder Anliegens..."
           />
           {errors.description && (
-            <p className="mt-1 text-sm text-red-600">{errors.description.message}</p>
+            <p className="mt-1 text-sm" style={{ color: '#dc2626' }}>{errors.description.message}</p>
           )}
         </div>
 
         {/* Kontakt */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label style={labelStyle}>
             Kontakt
           </label>
           <input
             {...register('contact')}
             type="text"
-            className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            style={inputStyle}
             placeholder="Name, E-Mail oder Telefonnummer..."
           />
           {errors.contact && (
-            <p className="mt-1 text-sm text-red-600">{errors.contact.message}</p>
+            <p className="mt-1 text-sm" style={{ color: '#dc2626' }}>{errors.contact.message}</p>
           )}
         </div>
 
         {/* Datum */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label style={labelStyle}>
             Datum
           </label>
           <DatePicker value={date} onChange={setDate} />
@@ -140,7 +170,7 @@ export function CreateTicketForm({ onSubmit, isLoading = false }: CreateTicketFo
 
         {/* Priorität */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-3">
+          <label style={labelStyle}>
             Priorität
           </label>
           <div className="grid grid-cols-3 gap-3">
@@ -154,14 +184,17 @@ export function CreateTicketForm({ onSubmit, isLoading = false }: CreateTicketFo
                     ? `border-blue-500 ${option.bg}`
                     : 'border-gray-200 bg-white hover:border-gray-300'
                 }`}
+                style={{
+                  backgroundColor: priority === option.value ? '#f0f9ff' : '#ffffff',
+                  color: '#1e293b',
+                  border: priority === option.value ? '2px solid #2563eb' : '2px solid #d1d5db'
+                }}
               >
                 <div className="flex items-center justify-center space-x-2">
                   {option.value === 'high' && (
                     <AlertTriangle className="h-4 w-4 text-red-500" />
                   )}
-                  <span className={`font-medium ${
-                    priority === option.value ? option.color : 'text-gray-700'
-                  }`}>
+                  <span className="font-medium" style={{ color: '#1e293b' }}>
                     {option.label}
                   </span>
                 </div>
@@ -172,14 +205,15 @@ export function CreateTicketForm({ onSubmit, isLoading = false }: CreateTicketFo
 
         {/* Mitarbeiter-Zuweisung */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-3">
+          <label style={labelStyle}>
             Zuweisung
           </label>
           <div className="space-y-3">
             {(['nico', 'finnja'] as const).map((user) => (
               <label
                 key={user}
-                className="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors"
+                className="flex items-center space-x-3 p-3 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors"
+                style={{ backgroundColor: '#f9fafb', color: '#1e293b' }}
               >
                 <input
                   type="checkbox"
@@ -188,7 +222,7 @@ export function CreateTicketForm({ onSubmit, isLoading = false }: CreateTicketFo
                   className="h-4 w-4 text-blue-600 rounded focus:ring-blue-500"
                 />
                 <User className="h-5 w-5 text-gray-500" />
-                <span className="font-medium text-gray-900 capitalize">
+                <span className="font-medium capitalize" style={{ color: '#1e293b' }}>
                   {user}
                 </span>
               </label>
@@ -198,34 +232,38 @@ export function CreateTicketForm({ onSubmit, isLoading = false }: CreateTicketFo
 
         {/* Datei-Upload */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-3">
-            Dateien & Bilder
+          <label style={labelStyle}>
+            Dateien anhängen (optional)
           </label>
-          <FileUpload onFilesChange={setFiles} />
+          <FileUpload
+            files={files}
+            onFilesChange={setFiles}
+            maxFiles={5}
+            maxSizeInMB={10}
+          />
         </div>
 
         {/* Submit Button */}
-        <div className="pt-6">
+        <div className="pt-4">
           <button
             type="submit"
-            disabled={isLoading || assignedUsers.length === 0}
-            className="w-full flex items-center justify-center space-x-2 py-4 px-6 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            disabled={isLoading}
+            className="w-full flex items-center justify-center space-x-2 py-4 px-6 rounded-xl font-semibold transition-colors focus:ring-4 focus:ring-blue-500/20"
+            style={{
+              backgroundColor: '#2563eb',
+              color: '#ffffff',
+              border: 'none',
+              cursor: isLoading ? 'not-allowed' : 'pointer',
+              opacity: isLoading ? 0.7 : 1
+            }}
           >
             {isLoading ? (
-              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white" />
+              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
             ) : (
-              <>
-                <Send className="h-5 w-5" />
-                <span>Ticket absenden</span>
-              </>
+              <Send className="h-5 w-5" />
             )}
+            <span>{isLoading ? 'Wird erstellt...' : 'Ticket erstellen'}</span>
           </button>
-          
-          {assignedUsers.length === 0 && (
-            <p className="mt-2 text-sm text-amber-600 text-center">
-              Bitte mindestens einen Mitarbeiter zuweisen
-            </p>
-          )}
         </div>
       </form>
     </div>
