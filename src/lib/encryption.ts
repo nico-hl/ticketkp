@@ -11,6 +11,11 @@ export const decrypt = (ciphertext: string): string => {
   return bytes.toString(CryptoJS.enc.Utf8);
 };
 
+// Check if text is encrypted (starts with "U2FsdGVkX1" which is base64 for "Salted__")
+const isEncrypted = (text: string): boolean => {
+  return text.startsWith('U2FsdGVkX1');
+};
+
 // Encrypt sensitive ticket fields
 export const encryptTicketData = (data: { subject: string; description: string; contact: string; [key: string]: unknown }) => {
   return {
@@ -26,12 +31,17 @@ export const decryptTicketData = (data: { subject: string; description: string; 
   try {
     return {
       ...data,
-      subject: decrypt(data.subject),
-      description: decrypt(data.description),
-      contact: decrypt(data.contact),
+      subject: isEncrypted(data.subject) ? decrypt(data.subject) : data.subject,
+      description: isEncrypted(data.description) ? decrypt(data.description) : data.description,
+      contact: isEncrypted(data.contact) ? decrypt(data.contact) : data.contact,
     };
   } catch (error) {
     console.error('Decryption failed:', error);
-    return data; // Return original data if decryption fails
+    return {
+      ...data,
+      subject: isEncrypted(data.subject) ? '[Decryption Error]' : data.subject,
+      description: isEncrypted(data.description) ? '[Decryption Error]' : data.description,
+      contact: isEncrypted(data.contact) ? '[Decryption Error]' : data.contact,
+    };
   }
 }; 
