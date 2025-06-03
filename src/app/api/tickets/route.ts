@@ -3,6 +3,19 @@ import { db } from '@/lib/database';
 import { encryptTicketData, decryptTicketData } from '@/lib/encryption';
 import type { Ticket, CreateTicketData } from '@/types/ticket';
 
+// Helper function to safely parse JSON
+function safeJsonParse(jsonString: any, fallback: any = []) {
+  if (!jsonString || jsonString === null || jsonString === '') {
+    return fallback;
+  }
+  try {
+    return JSON.parse(jsonString);
+  } catch (error) {
+    console.warn('JSON parse error:', error, 'Input:', jsonString);
+    return fallback;
+  }
+}
+
 // GET /api/tickets - Alle Tickets abrufen
 export async function GET() {
   try {
@@ -16,6 +29,19 @@ export async function GET() {
         contact: row.contact,
       });
 
+      // Sichere JSON-Parsing mit Fallbacks
+      const assignedUsers = Array.isArray(row.assigned_users) 
+        ? row.assigned_users 
+        : safeJsonParse(row.assigned_users, []);
+      
+      const files = safeJsonParse(row.files, []);
+      const historyData = safeJsonParse(row.history, []);
+      
+      const history = historyData.map((h: any) => ({
+        ...h,
+        timestamp: new Date(h.timestamp || Date.now()),
+      }));
+
       return {
         id: row.id,
         subject: decrypted.subject,
@@ -24,12 +50,9 @@ export async function GET() {
         date: new Date(row.date),
         status: row.status,
         priority: row.priority,
-        assignedUsers: row.assigned_users || [],
-        files: JSON.parse(row.files || '[]'),
-        history: JSON.parse(row.history || '[]').map((h: any) => ({
-          ...h,
-          timestamp: new Date(h.timestamp),
-        })),
+        assignedUsers,
+        files,
+        history,
         createdAt: new Date(row.created_at),
         updatedAt: new Date(row.updated_at),
       } as Ticket;
@@ -56,7 +79,8 @@ export async function POST(request: NextRequest) {
     const contact = formData.get('contact') as string;
     const date = new Date(formData.get('date') as string);
     const priority = formData.get('priority') as string;
-    const assignedUsers = JSON.parse(formData.get('assignedUsers') as string || '[]');
+    const assignedUsersData = formData.get('assignedUsers') as string;
+    const assignedUsers = safeJsonParse(assignedUsersData, []);
 
     // Ticket ID generieren
     const ticketId = crypto.randomUUID();
@@ -106,7 +130,7 @@ export async function POST(request: NextRequest) {
       ticket.date.toISOString(),
       ticket.status,
       ticket.priority,
-      ticket.assignedUsers,
+      JSON.stringify(ticket.assignedUsers),
       JSON.stringify(ticket.files),
       JSON.stringify(ticket.history),
       ticket.createdAt.toISOString(),
